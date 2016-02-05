@@ -11,14 +11,12 @@ function VLU() {
   for (var sheetId = 0; sheetId<sheets.length; sheetId++){
     if(sheets[sheetId].getSheetName() == "List_1" && sheets[sheetId].getSheetName() == "Data"){continue;}
       var SheetName = sheets[sheetId].getRange("A1").getValues();
-      for(var i=0, iLen=SheetName.length; i<iLen; i++) {  
         for(var j=0, jLen=DataSheet.length; j<jLen; j++) {
             if(SheetName == DataSheet[j][0]) {
               var rowNum = j+1;
               var GetData = ss.getSheetByName("Data").getRange(rowNum, 3, 1, 9).getValues();           
               sheets[sheetId].getRange(Data_row,2,1,9).setValues(GetData);
             }
-        }
       }                            
     } 
   ss.getSheetByName("Data").clear();
