@@ -4,7 +4,6 @@ function myFind() {
   var searchData = ss.getSheetByName('Data_grave').getDataRange().getValues();
 
   var found = false;
-  for(var i=1, iLen=findData.length; i<iLen && !found; i++) {  
     for(var j=0, jLen=searchData.length; j<jLen && !found; j++) {
       for(var k=0, kLen=searchData[0].length; k<kLen && !found; k++) {
         var find = findData;
@@ -15,6 +14,5 @@ function myFind() {
         }
       }
     }
-  }
-  ss.getSheetByName('Data_grave').getRange(rowNum,collNum).setValue("wow2");
+  ss.getSheetByName('Data_grave').getRange(rowNum,collNum).setValue("wow");
 }
