@@ -7,16 +7,18 @@ function vLeads() {
   
    rangeNames.forEach(function(row) {
      var ActiveDate = ss.getSheetByName("Data").getRange("B1").getValues();
+     var StartDate = new Date(ActiveDate);
      var EndRow = ss.getSheetByName("Data").getRange("B3").getValue();
      var sheet = ss.getSheetByName (row[0]);
      var DataSheet = sheet.getDataRange().getValues();
+     
        for(var j=0, jLen=DataSheet.length; j<jLen; j++) {
-         if(DataSheet[j][0] == ActiveDate) {
+         if(DataSheet[j][0].valueOf() == StartDate.valueOf()) {
          var rowNum = j+1;
-         sheet.getRange(rowNum, 2, EndRow, 2).clear();
+         sheet.getRange(rowNum, 2, EndRow, 1).clear();
                              
        }
          } 
    });
   
-}
+ }
