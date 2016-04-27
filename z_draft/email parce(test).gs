@@ -7,7 +7,7 @@ function mParse2() {
 
   for (var i=0; i<threads.length; i++)
   {
-    var message = threads[i].getMessages(); // берем все сообщения из цепочки
+    var message = threads[i].getMessages(); 
     
     for (var j=0; j<message.length; j++)
     {
