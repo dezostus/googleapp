@@ -7,24 +7,24 @@ function mParse2() {
 
   for (var i=0; i<threads.length; i++)
   {
-    var tmp,
-      message = threads[i].getMessages()[0],
-      subject = message.getSubject(),
-      content = message.getPlainBody(),
-      dat = message.getDate();
+    var message = threads[i].getMessages(); // берем все сообщения из цепочки
     
     for (var j=0; j<message.length; j++)
     {
-    
-      if (content) {
+      var tmp,
+      subject = message[j].getSubject(),
+      content = message[j].getPlainBody(),
+      dat = message[j].getDate();
+           
+      if (content && message[j].isUnread()==true) {
  
-      tmp = content.match(/Телефон:(.*)?</i);
-      var phone = (tmp && tmp[1]) ? tmp[1].trim() : 'No username';
+      tmp = content.match(/Phone:(.*)?</i);
+      var phone = (tmp && tmp[1]) ? tmp[1].trim() : 'No phone';
  
       tmp = content.match(/Email:\s*([A-Za-z0-9@.]+)/);
       var email = (tmp && tmp[1]) ? tmp[1].trim() : 'No email';
  
-      tmp = content.match(/Комментарий:(.*)?</i);
+      tmp = content.match(/Comment:(.*)?</i);
       var comment = (tmp && tmp[1]) ? tmp[1] : 'No comment';
  
       sheet.appendRow([dat, email, subject, phone, comment]);
