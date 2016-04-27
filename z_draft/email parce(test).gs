@@ -18,7 +18,7 @@ function mParse2() {
            
       if (content && message[j].isUnread()==true) {
  
-      tmp = content.match(/Phone:^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/);
+      tmp = content.match(/Phone:^((8|\+)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/);
       var phone = (tmp && tmp[1]) ? tmp[1].trim() : 'No phone';
  
       tmp = content.match(/Email:\s*([A-Za-z0-9@.]+)/);
