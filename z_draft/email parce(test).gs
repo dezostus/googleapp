@@ -18,13 +18,13 @@ function mParse2() {
            
       if (content && message[j].isUnread()==true) {
  
-      tmp = content.match(/Phone:(.*)?</i);
+      tmp = content.match(/Phone:\s*([A-Za-z0-9\s]+)(\r?\n)/);
       var phone = (tmp && tmp[1]) ? tmp[1].trim() : 'No phone';
  
       tmp = content.match(/Email:\s*([A-Za-z0-9@.]+)/);
       var email = (tmp && tmp[1]) ? tmp[1].trim() : 'No email';
  
-      tmp = content.match(/Comment:(.*)?</i);
+      tmp = content.match(/Comment:\s*([\s\S]+)/);
       var comment = (tmp && tmp[1]) ? tmp[1] : 'No comment';
  
       sheet.appendRow([dat, email, subject, phone, comment]);
