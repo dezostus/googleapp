@@ -2,7 +2,7 @@ function mParse2() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("parsemail");
-  var label = GmailApp.getUserLabelByName("Тест");
+  var label = GmailApp.getUserLabelByName("Test");
   var threads = label.getThreads();
 
   for (var i=0; i<threads.length; i++)
