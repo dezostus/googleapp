@@ -1,8 +1,8 @@
 function mParseForm() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("Тест");
-  var label = GmailApp.getUserLabelByName("Лендинги/Натяжные потолки");
+  var sheet = ss.getSheetByName("Входящие заявки с форм");
+  var label = GmailApp.getUserLabelByName("Лендинги/Гаражные ворота");
   var threads = label.getThreads(); 
 
   for (var i=0; i<threads.length; i++)
@@ -16,23 +16,20 @@ function mParseForm() {
       content = message[j].getBody(),
       dat = message[j].getDate();
           
-      if (content) {
-      //if (content && message[j].isUnread()==true) {
+      //if (content) {
+      if (content && message[j].isUnread()==true) {
   
       tmp = content.match(/phone:\s*((?:[48+][- ]?)?(?:\(?\d{3}\)?[- ]?)?[\d -]{7,10})/);
       var phone = (tmp && tmp[1]) ? tmp[1].trim() : 'No phone';
  
-      tmp = content.match(/email:\s*([A-Za-z0-9@.]+)/);
+      tmp = content.match(/email:\s*([A-Za-z0-9@.].*)(?=<\/p>)/);
       var email = (tmp && tmp[1]) ? tmp[1].trim() : 'No email';
  
-      tmp = content.match(/comment:.*\n.*<p>\s*([\s\S]+?)(?=<\/p>)|productname:\s*([\s\S]+?)(?=<\/p>\n<p>phone)/);
+      tmp = content.match(/comment:\s*([\s\S]+?)(?=<\/p>\n<p>phone)/);
       var comment = (tmp && tmp[1]) ? tmp[1] : 'No comment';
-        
-      tmp = content.match(/Ticket from site: <a href="([\s\S]+?)(?="\ target="_blank">)/);
-      var url = (tmp && tmp[1]) ? tmp[1] : 'url error';        
-         
-      sheet.appendRow([dat, email, subject, phone, comment, url,""]);
-      //message[j].markRead();  
+
+      sheet.appendRow([dat, email, subject, phone, comment, ""]);
+      message[j].markRead();  
      }
 
    }
