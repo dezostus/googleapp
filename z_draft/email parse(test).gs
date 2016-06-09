@@ -34,7 +34,7 @@ function mParseForm() {
 
     }
   }
-  newData.length && sheet.getRange(lr + 1, 1, newData.length; newData[0].length);
+  newData.length && sheet.getRange(lr + 1, 1, newData.length, newData[0].length);
 }
 
 function getLastRow(sheet) {
