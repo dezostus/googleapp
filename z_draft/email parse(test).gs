@@ -2,9 +2,10 @@ function mParseForm() {
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Входящие заявки с форм");
+  var sheet2 = ss.getSheetByName("Входящие заявки с форм").getRange("A:G").getValues();
   var label = GmailApp.getUserLabelByName("Лендинги/Гаражные ворота");
   var threads = label.getThreads()
-  var lr = getLastRow(sheet);
+  var lr = getLastRow(sheet2);
   var newData = [];
 
   for (var i = 0; i < threads.length; i++) {
@@ -40,11 +41,3 @@ function mParseForm() {
    } 
 }
 
-function getLastRow(sheet) {
-  var lr_ = sheet.length;
-  while (lr_ > 0) {
-    lr_--;
-    if (sheet[lr_][0]) return ++lr_;
-  }
-  return 1;
-}
