@@ -34,7 +34,10 @@ function mParseForm() {
 
     }
   }
-  newData.length && sheet.getRange(lr + 1, 1, newData.length, newData[0].length);
+  var dLenght = newData.length;
+   if (dLenght > 0) {
+   sheet.getRange(lr + 1, 1, newData.length, newData[0].length).setValues(newData);
+   } 
 }
 
 function getLastRow(sheet) {
