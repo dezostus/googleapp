@@ -1,15 +1,15 @@
 function mParseForm() {
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("Входящие заявки с форм");
-  var sheet2 = ss.getSheetByName("Входящие заявки с форм").getRange("A:G").getValues();
-  var label = GmailApp.getUserLabelByName("Лендинги/Гаражные ворота");
-  var threads = label.getThreads()
+  var sheet = ss.getSheetByName("Inbox forms");
+  var sheet2 = ss.getSheetByName("Inbox forms").getRange("A:G").getValues();
+  var label = GmailApp.getUserLabelByName("Land/Gates");
+  var threads = label.getThreads();
   var lr = getLastRow(sheet2);
   var newData = [];
 
   for (var i = 0; i < threads.length; i++) {
-    var message = threads[i].getMessages(); // берем все сообщения из цепочки
+    var message = threads[i].getMessages(); // take all messages from chains
 
     for (var j = 0; j < message.length; j++) {
       var tmp,
