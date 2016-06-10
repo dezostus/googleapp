@@ -41,3 +41,11 @@ function mParseForm() {
    } 
 }
 
+function getLastRow(sheet) {
+  var lr_ = sheet.length;
+  while (lr_ > 0) {
+    lr_--;
+    if (sheet[lr_][0]) return ++lr_;
+  }
+  return 1;
+}
