@@ -1,6 +1,6 @@
 <script>(function ( $ ) {
 
-//определяем максимальную глубину скроллинга и функции обработки времени
+//define maximal scrolling depth and time functions
 $.scrollEvent = function(current_max) { 
 var documentObj = $(document);
 var windowObj = $(window);
@@ -35,7 +35,7 @@ return !cur ? 0 : Math.floor(cur * 100 / doc);
 
 })( jQuery );
 
-//Определяем временные интервалы
+//Define time intervals
 function getTimeInterval(time) {
 	if (time >= 0 && time < 30)
 		return 'from 0 sec to 30 sec';
@@ -53,7 +53,7 @@ function getTimeInterval(time) {
 		return 'more 8 min';
 }
 
-//Определяем интервалы глубины скроллинга
+//Define scroll depth intervals
 function getScrollingInterval(deep) {
 	if (deep >= 0 && deep < 20)
 		return 'from 0% to 20%';
@@ -67,7 +67,7 @@ function getScrollingInterval(deep) {
 		return 'from 80% to 100%';
 }
 
-//Присваиваем характеристику читателю статьи исходя из глубины скроллинга и времени на странице
+//Define quality of users according to their scrolling depth and time on page
 function getCharacters(deep, time) {
     if (/Android|webOS|Windows Phone|Macintosh|Samsung|Nokia|Bada|Symbian|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
     var etalon = 21.1;
@@ -77,28 +77,28 @@ function getCharacters(deep, time) {
 	var etalonT = Math.floor(documentH / etalon, 2);
 	
 	if (deep >= 70 && time >= 0.7 * etalonT)
-		return 'Читал вдумчиво';
+		return 'Realy read';
 		
 	if (deep >= 70 && time < 0.7 * etalonT)
-		return 'Читал по диагонали';
+		return 'Fast reading';
 		
 	if (deep < 10)
-		return 'Не читал вовсе';
+		return 'Dont read at all';
 		
 	if (deep >= 40 && deep < 70 && time >= 0.5 * 0.7 * etalonT)
-		return 'Бросил читать на середине';
+		return 'Stop reading on middle';
 		
 	if (deep >= 10 && deep < 40 && time >= 0.25 * 0.7 * etalonT)
-		return 'Бросил читать в начале';
+		return 'Stop reading on start';
 	
 	if (deep >= 40 && deep < 70 && time < 0.5 * 0.7 * etalonT)
-		return 'Просмотрел материал до середины';
+		return 'Look page until the middle';
 		
 	if (deep >= 10 && deep < 40 && time < 0.25 * 0.7 * etalonT)
-		return 'Начал просматривать, но бросил в начале';
+		return 'Start looking but drop on the start';
 }
 
-//Осуществляем вызов вышеописанных функций и передаем данные в GTM
+//Start above functions and send data to GTM
 jQuery(document).ready(function() { 
 	var startLiveDoc = jQuery.fixTime();
 	var current_max = 0;
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
 	current_max = jQuery.scrollEvent(current_max);
 	});
 
-//назначаем объекту window событие, действие которого выполнится в момент завершения работы пользователя со страницей (закрытие, обновление, переход на другую страницу)
+//define an event to the object window, which will fired at the moment when user stop interact with the page (close/redirect/refresh page)
 	jQuery(window).bind('beforeunload', function(){
 		current_max_string = current_max.toString() + '%';
 		var endLiveDoc = jQuery.fixTime();
