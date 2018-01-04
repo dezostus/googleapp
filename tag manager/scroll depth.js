@@ -67,37 +67,6 @@ function getScrollingInterval(deep) {
 		return 'from 80% to 100%';
 }
 
-//Define quality of users according to their scrolling depth and time on page
-function getCharacters(deep, time) {
-    if (/Android|webOS|Windows Phone|Macintosh|Samsung|Nokia|Bada|Symbian|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
-    var etalon = 21.1;
-    else
-    var etalon = 15.7;
-	var documentH = jQuery(document).height();
-	var etalonT = Math.floor(documentH / etalon, 2);
-	
-	if (deep >= 70 && time >= 0.7 * etalonT)
-		return 'Realy read';
-		
-	if (deep >= 70 && time < 0.7 * etalonT)
-		return 'Fast reading';
-		
-	if (deep < 10)
-		return 'Dont read at all';
-		
-	if (deep >= 40 && deep < 70 && time >= 0.5 * 0.7 * etalonT)
-		return 'Stop reading on middle';
-		
-	if (deep >= 10 && deep < 40 && time >= 0.25 * 0.7 * etalonT)
-		return 'Stop reading on start';
-	
-	if (deep >= 40 && deep < 70 && time < 0.5 * 0.7 * etalonT)
-		return 'Look page until the middle';
-		
-	if (deep >= 10 && deep < 40 && time < 0.25 * 0.7 * etalonT)
-		return 'Start looking but drop on the start';
-}
-
 //Start above functions and send data to GTM
 jQuery(document).ready(function() { 
 	var startLiveDoc = jQuery.fixTime();
@@ -112,11 +81,9 @@ jQuery(document).ready(function() {
 		current_max_string = current_max.toString() + '%';
 		var endLiveDoc = jQuery.fixTime();
 		var timeLiveDoc = jQuery.timeFormat(endLiveDoc - startLiveDoc);
-		var character = getCharacters(current_max, endLiveDoc - startLiveDoc);
 		var percent_of_scrolling_int = getScrollingInterval(current_max);
 		var time_on_page_int = getTimeInterval(endLiveDoc - startLiveDoc);
-		dataLayer.push({'event': 'Scroll to', 'percent_of_scrolling': current_max_string, 'time_on_page': timeLiveDoc, 'character' : character, 'percent_of_scrolling_interval' : percent_of_scrolling_int, 'time_on_page_interval' : time_on_page_int});
+		dataLayer.push({'event': 'Scroll to', 'percent_of_scrolling': current_max_string, 'time_on_page': timeLiveDoc, 'percent_of_scrolling_interval': percent_of_scrolling_int, 'time_on_page_interval': time_on_page_int});
 	});
 });
 </script>
-
